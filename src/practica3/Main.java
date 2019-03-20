@@ -10,27 +10,32 @@ public class Main {
 	
 
 	public static void main(String[] args) {
-              	double nums[] = {83.0, 69.0, 67.0, 82.0, 69.0, 84.0, 79.0, 32.0, 68.0, 69.0, 32.0, 85.0, 78.0, 79.0, 32.0, 83.0, 69.0, 67.0, 82.0, 69.0, 84.0, 79.0, 32.0, 83.0, 69.0 ,71.0, 85.0, 82.0, 79.0};
-                cargarDatos(nums);
-                ejecutar();
-                imprimir();
+              	//double numsOriginal[] = {83.0, 69.0, 67.0, 82.0, 69.0, 84.0, 79.0, 32.0, 68.0, 69.0, 32.0, 85.0, 78.0, 79.0, 32.0, 83.0, 69.0, 67.0, 82.0, 69.0, 84.0, 79.0, 32.0, 83.0, 69.0 ,71.0, 85.0, 82.0, 79.0};
+        
+                double numsOriginal[] = {27,1,3,9};
+                int orden = 4;
+                double numsOrdenActual[] = numsOriginal;
+                for(int i = 0; i < orden; i++) {
+                	
+                	cargarDatos(numsOrdenActual);
+                    ejecutar();
+                    imprimir();
+                    double numsACalcular[] = FOrden(numsOriginal, numsOrdenActual ) ;
+                	numsOrdenActual = numsACalcular;
+                }
                 
-                System.out.println("\n\n");
-                
-                cargarDatos(  Fcuadrado(nums) );
-                ejecutar();
-                imprimir();
                 
                 
 
 	}
         
-        public static double[] Fcuadrado(double nums[]){         
-            double numsAux[] = new double[(int)Math.pow(nums.length, 2)];
+        public static double[] FOrden(double numsOriginal[], double numsOrdenActual[]){    
+        	int size = numsOriginal.length * numsOrdenActual.length;
+            double numsAux[] = new double[size];
             int count = 0;
-            for(int i = 0; i < nums.length; i++){
-                for(int j = 0; j < nums.length; j++){
-                    numsAux[count] = nums[i] * nums[j];
+            for(int i = 0; i < numsOrdenActual.length; i++){
+                for(int j = 0; j < numsOriginal.length; j++){
+                    numsAux[count] = numsOrdenActual[i] * numsOriginal[j];
                     count++;
                 }
             }
@@ -116,7 +121,7 @@ public class Main {
             double P;
             double eficacia = entropia / longitudMedia;
             System.out.println("La entropia es: "+entropia+" La Longitud media es: "+longitudMedia+ " La eficacia es: "+eficacia);
-            System.out.println("P                           f       Camino");
+            System.out.println("P           f       Camino");
             for(int i = 0;i < copiaNodos.length; i++) {
                 P = copiaNodos[i].getF() / total;
 		System.out.println(P+"        "+copiaNodos[i].getF()+"    "+copiaNodos[i].getCamino());
