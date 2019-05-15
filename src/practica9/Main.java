@@ -12,11 +12,6 @@ public class Main {
 
 	public static void run () {
 		String alf="abcdefghijklmnÒopqrstuvwxyzABCDEFGHIJKLMN—OPQRSTUVWXYZ·ÈÌÛ˙¡…Õ”⁄0123456789 ,.:!-ø?()";
-  
-		BigInteger nPepa=new BigInteger("62439738695706104201747"); 
-		BigInteger ePepa= new BigInteger("356812573"); 
-		BigInteger qPepa=new BigInteger("249879448303");
-		BigInteger pPepa =new BigInteger("249879448349");
 
 		
 		BigInteger nBenito=new BigInteger("743330222539755158153");
@@ -39,7 +34,9 @@ public class Main {
 		
 		String mensaje ="j˙I,ø Qb9,a5Ljw5DdgnwwEu ·FsTlEp.ÈCkÕR.xjdj0XøÒ8th”xuZ.Sg—mAEIÕPJjÛÌJ2t:7cPAp…C2nc…”?Ò·møJ)trZ4gF˙?kZ…AXÒd6Fø0cm4hO?Jxc,q 2P,V7tÛ—ndo⁄Aad”PAGLcbWD—(1pncYPnNKw:iÈÛEMÌvfZPDPa6ÕKU3mXk”)Ef1e…y4GjLdxE";
 	
-		BigInteger dJuan = eJuan.modInverse(nJuan);
+		BigInteger nuevap  = new BigInteger("2290182972660"); 
+		BigInteger nuevaq  = new BigInteger("2290182972708");
+		BigInteger dJuan = eJuan.modInverse(nuevap.multiply(nuevaq));
 		
 		Decodificar dec = new Decodificar();
 		BigInteger C = dec.textoAEntero(mensaje,alf, alf.length());
@@ -53,21 +50,50 @@ public class Main {
 
 		String[] frases = dec.dividirTexto(mensaje, k);
 		
-		BigInteger c = new BigInteger("0");
-		int kAux = k-1;
-		
+		String solucion = "";
+	
 		for(int i = 0; i < frases.length;i++) {
 			BigInteger Caux = dec.textoAEntero(frases[i], alf, alf.length());
-			c = c.add( Caux.multiply(base.pow(kAux) )  );
-			kAux--;
+			BigInteger Caux2 = Caux.modPow(dJuan, nJuan);
+			String fraseaux = dec.enteroATexto(Caux2, base, alf);
+			if(fraseaux.length() < k-1) {
+				for(int j = fraseaux.length(); j < k-1;j++) {
+					fraseaux = "a"+fraseaux;
+				}
+			}
+			solucion += fraseaux;
 		}
+
+		solucion = solucion.replace("  ", "\n");
+		System.out.println(solucion);
 		
-		BigInteger b = c.modPow(dJuan, nJuan);
-		ArrayList<String>  B = dec.obtenerEnteros(b, base);
-		for(String aux: B) {
-			BigInteger auxA = new BigInteger(aux);
-			System.out.print(dec.enteroATexto(auxA, base, alf));
+		
+	
+		
+		  
+		BigInteger nPepa=new BigInteger("62439738695706104201747"); 
+		BigInteger ePepa= new BigInteger("356812573"); 
+		BigInteger qPepa=new BigInteger("249879448303");
+		BigInteger pPepa =new BigInteger("249879448349");
+				
+		
+		int kPepa = dec.calcularK(base, nPepa);
+		kPepa--;
+		String fraseACod = "ES MI CASA.";
+		System.out.println(fraseACod.length()+ " "+kPepa);
+
+		BigInteger mPepa = dec.textoAEntero(fraseACod, alf, alf.length());
+
+		BigInteger cPepa = mPepa.modPow(ePepa, nPepa);
+		ArrayList<String> auxPepa = dec.obtenerEnteros(cPepa, base);
+		for(String i:auxPepa) {
+			System.out.print(i+ " ");
 		}
+		System.out.println();
+		String decPepa = dec.enteroATexto(cPepa, base, alf);
+		System.out.println(decPepa);
+		
+		
 		
 	}
 }

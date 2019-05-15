@@ -79,10 +79,9 @@ public class Decodificar {
 	}
 	
 	public String[] dividirTexto(String texto, int longitud) {
-		String[] resultado = new String[longitud];
-		int tam = texto.length()/longitud;
+		String[] resultado = new String[texto.length()/longitud];
 		for(int i = 0; i < resultado.length; i++) {
-			resultado[i] = texto.substring((i*tam), (i*tam)+tam);
+			resultado[i] = texto.substring((i*longitud), (i*longitud)+longitud);
 
 		}
 		return resultado;
